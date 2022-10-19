@@ -1,0 +1,63 @@
+version: '3.9'
+
+x-base_app: &base_app
+  build:
+    context: .
+    dockerfile: build/Dockerfile
+    args:
+      RAILS_ENV: development
+  depends_on:
+    - db
+    - redis
+  environment:
+    LANG: 'C.UTF-8'
+    RAILS_ENV: development
+    SPRING_SOCKET: 'tmp/pids/spring.sock'
+    SPRING_SERVER_COMMAND: 'build-compose up spring'
+    POSTGRES_HOST: db
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: postgres
+    REDIS_URL: redis://redis:6379/0
+  env_file:
+    - secrets.env
+  volumes:
+    - .:/rails_app
+    - bundle-data:/usr/local/bundle
+  stdin_open: true
+  tty: true
+
+services:
+  rails:
+    <<: *base_app
+    command: bundle exec rails server -b 0.0.0.0 -p '3000'
+    ports:
+      - '3000:3000'
+
+        # springs:
+        #   <<: *base_app
+        #   command: bundle exec spring server
+        #   pid: host
+
+  db:
+    image: postgres:15.0
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /var/lib/postgresql/data
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7.0.5
+    ports:
+      - '6379:6379'
+    command: redis-server --loglevel notice
+    volumes:
+      - redis-data:/data
+
+volumes:
+  postgres-data: {}
+  bundle-data: {}
+  redis-data: {}
