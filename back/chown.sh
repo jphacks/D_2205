@@ -1,1 +1,1 @@
-sudo chown -R nission:nission .
+sudo chown -R $PID:$PID .

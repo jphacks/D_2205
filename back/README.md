@@ -7,9 +7,10 @@ NEED [docker](https://www.docker.com/)!!!
 ### First time only
 
 ```sh
+touch secrets.env
 docker-compose build
 docker-compose run --rm rails bundle install
-docker-compose run --rm rails bundle rake exec db:create
+docker-compose run --rm rails bundle exec rake db:create
 ```
 
 ### Up development server
