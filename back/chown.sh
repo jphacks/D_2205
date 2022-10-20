@@ -1,1 +1,1 @@
-sudo chown -R $PID:$PID .
+sudo chown -R $UID:$UID .

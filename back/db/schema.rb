@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_20_150855) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_20_151617) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -54,6 +54,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_20_150855) do
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "prefecture_id"
+    t.index ["prefecture_id"], name: "index_posts_on_prefecture_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -74,5 +76,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_20_150855) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bookmarks", "posts"
   add_foreign_key "bookmarks", "users"
+  add_foreign_key "posts", "prefectures"
   add_foreign_key "posts", "users"
 end
