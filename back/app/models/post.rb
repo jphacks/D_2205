@@ -4,7 +4,7 @@ class Post < ApplicationRecord
   belongs_to :user
   has_one_attached :image
 
-  belongs_to :prefecture
+  belongs_to :prefecture, optional: true
 
   def image_url
     image.attached? ? url_for(image) : nil

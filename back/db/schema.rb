@@ -76,6 +76,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_20_151617) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bookmarks", "posts"
   add_foreign_key "bookmarks", "users"
-  add_foreign_key "posts", "prefectures"
   add_foreign_key "posts", "users"
 end
