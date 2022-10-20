@@ -1,13 +1,20 @@
 class BookmarksController < ApplicationController
   before_action :set_bookmark, only: %i[ destroy ]
+  def index
+    user = User.find(bookmark_params[:user_id])
+    @bookmarks = user.bookmarked_posts
+
+    render json: @bookmarks
+  end
 
   def create
     @bookmark = Bookmark.new(bookmark_params)
+    post = Post.find(bookmark_params[:post_id])
 
     if @bookmark.save
-      render status: :ok
+      render json: post, status: :ok
     else
-      render json: @user.errors, status: :unprocessable_entity
+      render json: @bookmark.errors, status: :unprocessable_entity
     end
   end
 
@@ -22,6 +29,6 @@ class BookmarksController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   # Only allow a list of trusted parameters through.
   def bookmark_params
-    params.require(:bookmark).permit(:user, :post)
+    params.permit(:user_id, :post_id)
   end
 end
