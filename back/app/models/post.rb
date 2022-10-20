@@ -9,4 +9,8 @@ class Post < ApplicationRecord
   def image_url
     image.attached? ? url_for(image) : nil
   end
+
+  def prefecture_name
+    prefecture != nil ? prefecture.name : "不明地"
+  end
 end
