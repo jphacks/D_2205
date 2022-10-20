@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_many :posts
-  has_many :bookmarks
+  has_many :bookmarks, dependent: :destroy
   has_many :bookmarked_posts, through: :bookmarks, source: :post
 
   validates :name, :email, uniqueness: true, presence: true
