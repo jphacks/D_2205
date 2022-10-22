@@ -35,8 +35,8 @@ privateでは友人間で訪れた場所の写真などを共有することで�
 * 
 
 #### フレームワーク・ライブラリ・モジュール
-* フロント：vue.js  
-* バックエンド：ruby on rails, PostgreSQL  
+* フロント：Vue.js  
+* バックエンド：Ruby on Rails, PostgreSQL  
 
 #### デバイス
 * 
