@@ -11,6 +11,6 @@ class Post < ApplicationRecord
   end
 
   def prefecture_name
-    prefecture != nil ? prefecture.name : "不明地"
+    prefecture&.name || "不明地"
   end
 end
